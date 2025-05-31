@@ -285,18 +285,18 @@ function Tours() {
                         transition: background-color 0.3s ease, transform 0.3s ease;
                     }
                     .btn-primary:hover {
-                        background-color: #ff9d00; /* Màu vàng cam nổi bật khi hover */
+                        background-color: #ff9d00; 
                         transform: translateY(-2px);
                     }
                     .search-btn {
                         padding: 10px 20px;
-                        border-radius: 25px; /* Bo góc mềm mại */
+                        border-radius: 25px; 
                         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                         font-size: 1rem;
                     }
                     .details-btn {
                         padding: 8px 16px;
-                        border-radius: 20px; /* Bo góc nhẹ */
+                        border-radius: 20px; 
                         font-size: 0.9rem;
                         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                         display: inline-block;

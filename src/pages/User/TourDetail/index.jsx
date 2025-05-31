@@ -17,18 +17,18 @@ function TourDetail() {
     }
 
     const handleBookTour = () => {
-        navigate(`/tours/${id}/book`); // Chuyển hướng đến trang đặt tour
+        navigate(`/tours/${id}/book`);
     };
 
     const handleReviewTour = () => {
-        navigate(`/tours/${id}/review`); // Chuyển hướng đến trang đánh giá 
+        navigate(`/tours/${id}/review`);
     };
 
     const renderStars = (rating) => {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
             stars.push(
-                <span key={i} style={{ color: i <= Math.floor(rating) ? '#ffd700' : '#e4e4e4' }}>
+                <span key={i} style={{ color: i <= Math.floor(rating) ? '#ffd700' : '#e4e4e4', fontSize: '1.2rem' }}>
                     ★
                 </span>
             );
@@ -58,7 +58,7 @@ function TourDetail() {
                             <li><b>💰 Giá:</b> {tour.price.toLocaleString()} VNĐ</li>
                             <li><b>🔥 Độ phổ biến:</b> {tour.popularity} lượt xem</li>
                         </ul>
-                        <div className="d-flex gap-3 mb-3">
+                        <div className="d-flex gap-3 mb-3 flex-wrap">
                             <button className="btn btn-success" onClick={handleBookTour}>
                                 Đặt tour ngay
                             </button>
@@ -71,13 +71,16 @@ function TourDetail() {
 
                 {/* Lịch trình */}
                 <div className="mt-5">
-                    <h2 className="mb-4">🗓 Lịch trình</h2>
-                    <div className="row row-cols-1 row-cols-md-2 g-4">
+                    <h2 className="mb-5">🗓 Lịch trình chi tiết</h2>
+                    <div className="schedule-timeline">
                         {tour.schedule.map((item, index) => (
-                            <div key={index} className="col">
-                                <div className="schedule-card p-3 rounded shadow-sm">
-                                    <h5 className="text-primary">Phần {index + 1}</h5>
-                                    <p className="mb-0">{item}</p>
+                            <div key={index} className="timeline-item">
+                                <div className="timeline-dot">
+                                    <span className="dot-icon">📅</span>
+                                </div>
+                                <div className="timeline-content p-3 rounded shadow-sm">
+                                    <h5 className="text-primary mb-2">Phần {index + 1}</h5>
+                                    <p>{item}</p>
                                 </div>
                             </div>
                         ))}
@@ -86,17 +89,27 @@ function TourDetail() {
 
                 {/* Đánh giá */}
                 <div className="mt-5">
-                    <h2 className="mb-4">⭐ Đánh giá</h2>
-                    <div className="row row-cols-1 g-4">
-                        {tour.reviews.map((review, index) => (
-                            <div key={index} className="col">
-                                <div className="review-card p-3 rounded shadow-sm">
-                                    <h5 className="card-title mb-2">{review.user}</h5>
-                                    <div className="mb-2">{renderStars(review.rating)}</div>
-                                    <p className="card-text mb-0">{review.comment}</p>
+                    <h2 className="mb-5">⭐ Đánh giá từ khách hàng</h2>
+                    <div className="reviews-grid">
+                        {tour.reviews.length > 0 ? (
+                            tour.reviews.map((review, index) => (
+                                <div key={index} className="review-card p-3 rounded shadow-sm">
+                                    <div className="d-flex align-items-center mb-2">
+                                        <div className="avatar me-2">
+                                            <span>{review.user.charAt(0)}</span>
+                                        </div>
+                                        <div>
+                                            <h5 className="mb-1">{review.user}</h5>
+                                            <div className="star-rating mb-1">{renderStars(review.rating)}</div>
+                                        </div>
+                                    </div>
+                                    <p className="review-comment mb-1">{review.comment}</p>
+                                    <small className="text-muted">{review.date}</small>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p className="text-center text-muted">Chưa có đánh giá nào cho tour này.</p>
+                        )}
                     </div>
                 </div>
 
@@ -117,31 +130,112 @@ function TourDetail() {
                     }
                     .tour-detail-section h1,
                     .tour-detail-section h2 {
-                        font-weight: bold;
+                        font-weight: 700;
                         color: #1e3a8a;
                     }
-                    .schedule-card {
-                        background: #fff;
-                        border-left: 4px solid #1e3a8a;
-                        transition: box-shadow 0.3s ease;
+
+                    /* Lịch trình - Timeline */
+                    .schedule-timeline {
+                        position: relative;
+                        max-width: 700px; 
+                        margin: 0 auto;
+                        padding-left: 30px; 
                     }
-                    .schedule-card:hover {
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    .schedule-timeline::before {
+                        content: '';
+                        position: absolute;
+                        left: 15px; 
+                        top: 0;
+                        bottom: 0;
+                        width: 2px;
+                        background: #1e3a8a;
+                    }
+                    .timeline-item {
+                        position: relative;
+                        margin-bottom: 25px; 
+                    }
+                    .timeline-dot {
+                        position: absolute;
+                        left: -35px; 
+                        top: 0;
+                        width: 35px; 
+                        height: 35px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .dot-icon {
+                        font-size: 1.3rem; 
+                        color: #1e3a8a;
+                        background: #fff;
+                        border-radius: 50%;
+                        padding: 4px; 
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+                    }
+                    .timeline-content {
+                        background: #fff;
+                        border-left: 4px solid #1e3a8a; 
+                        padding: 10px; 
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    }
+                    .timeline-content:hover {
+                        transform: translateX(8px); 
+                        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+                    }
+
+                    /* Đánh giá */
+                    .reviews-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+                        gap: 15px; 
                     }
                     .review-card {
                         background: #fff;
-                        border-left: 4px solid #28a745;
-                        transition: box-shadow 0.3s ease;
+                        border-radius: 8px; 
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
                     }
                     .review-card:hover {
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                        transform: translateY(-4px); 
+                        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2); 
+                    }
+                    .avatar {
+                        width: 35px; 
+                        height: 35px;
+                        background: #1e3a8a;
+                        color: #fff;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 600;
+                        font-size: 1.1rem; 
+                    }
+                    .star-rating {
+                        display: flex;
+                        gap: 2px; 
+                    }
+                    .review-comment {
+                        font-size: 0.9rem; 
+                        line-height: 1.4; 
+                        color: #555;
+                        margin-bottom: 8px; 
+                    }
+                    .review-card::before {
+                        width: 4px; 
+                        background: #28a745;
+                    }
+
+                    /* Nút */
+                    .btn-success, .btn-info, .btn-primary {
+                        padding: 10px 20px;
+                        border-radius: 25px;
+                        transition: background-color 0.3s ease, transform 0.3s ease;
                     }
                     .btn-success {
                         background-color: #28a745;
                         border-color: #28a745;
-                        padding: 10px 20px;
-                        border-radius: 25px;
-                        transition: background-color 0.3s ease, transform 0.3s ease;
                     }
                     .btn-success:hover {
                         background-color: #218838;
@@ -151,9 +245,6 @@ function TourDetail() {
                     .btn-info {
                         background-color: #17a2b8;
                         border-color: #17a2b8;
-                        padding: 10px 20px;
-                        border-radius: 25px;
-                        transition: background-color 0.3s ease, transform 0.3s ease;
                     }
                     .btn-info:hover {
                         background-color: #138496;
@@ -163,18 +254,26 @@ function TourDetail() {
                     .btn-primary {
                         background-color: #1e3a8a;
                         border-color: #1e3a8a;
-                        padding: 10px 20px;
-                        border-radius: 25px;
-                        transition: background-color 0.3s ease, transform 0.3s ease;
                     }
                     .btn-primary:hover {
                         background-color: #163273;
                         border-color: #122a60;
                         transform: translateY(-2px);
                     }
+
+                    /* Responsive */
                     @media (max-width: 768px) {
-                        .row-cols-md-2 {
-                            flex-direction: column;
+                        .schedule-timeline {
+                            padding-left: 25px;
+                        }
+                        .schedule-timeline::before {
+                            left: 12px;
+                        }
+                        .timeline-dot {
+                            left: -30px;
+                        }
+                        .reviews-grid {
+                            grid-template-columns: 1fr;
                         }
                     }
                 `}

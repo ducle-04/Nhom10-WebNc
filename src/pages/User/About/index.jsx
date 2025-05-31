@@ -42,21 +42,21 @@ function About() {
                     <div className="content-section animate-on-scroll">
                         <h2 className="section-subtitle">Sứ mệnh</h2>
                         <p className="section-text">
-                            Wide Quest cam kết mang đến những trải nghiệm du lịch độc đáo, giúp khách hàng khám phá thế giới với sự an toàn, tiện nghi và ý nghĩa. Chúng tôi nỗ lực bảo vệ môi trường và tôn vinh văn hóa địa phương trong mỗi hành trình.
+                            Wide Quest tự hào là người bạn đồng hành đáng tin cậy trên mỗi hành trình khám phá thế giới. Chúng tôi cam kết mang đến những trải nghiệm du lịch khác biệt — không chỉ an toàn, tiện nghi mà còn đong đầy cảm xúc và ý nghĩa. Mỗi chuyến đi cùng Wide Quest là cơ hội để du khách mở rộng tầm nhìn, hòa mình vào vẻ đẹp thiên nhiên hoang sơ, cảm nhận nét văn hóa bản địa đậm đà và lưu giữ những khoảnh khắc khó quên. Đồng thời, chúng tôi luôn đặt trách nhiệm bảo vệ môi trường và gìn giữ bản sắc văn hóa địa phương làm kim chỉ nam trong mọi hoạt động, nhằm hướng đến du lịch bền vững và đầy nhân văn.
                         </p>
                     </div>
 
                     <div className="content-section animate-on-scroll">
                         <h2 className="section-subtitle">Đội ngũ</h2>
                         <p className="section-text">
-                            Đội ngũ Wide Quest gồm các chuyên gia du lịch giàu kinh nghiệm, hướng dẫn viên tận tâm và nhân viên hỗ trợ nhiệt tình. Chúng tôi luôn sẵn sàng đồng hành cùng bạn trên mọi chuyến đi.
+                            Với sự am hiểu sâu sắc về từng điểm đến và tinh thần phục vụ chuyên nghiệp, đội ngũ Wide Quest không chỉ mang đến cho bạn sự an tâm mà còn tạo nên những trải nghiệm cá nhân hóa, gần gũi và đáng nhớ. Dù bạn là người yêu thiên nhiên, đam mê khám phá hay tìm kiếm những hành trình thư giãn, chúng tôi luôn sẵn sàng lắng nghe, tư vấn và thiết kế hành trình phù hợp nhất — để mỗi chuyến đi cùng Wide Quest đều là một kỷ niệm khó quên.
                         </p>
                     </div>
 
                     <div className="content-section animate-on-scroll">
                         <h2 className="section-subtitle">Lịch sử thành lập</h2>
                         <p className="section-text">
-                            Wide Quest được thành lập vào năm 2020 với mục tiêu tạo ra một nền tảng du lịch đột phá, kết nối đam mê khám phá với các dịch vụ chất lượng cao. Từ một đội ngũ nhỏ, chúng tôi đã phát triển thành một thương hiệu được tin tưởng.
+                            Trải qua hành trình không ngừng đổi mới, Wide Quest đã phục vụ hàng ngàn lượt khách mỗi năm, mở rộng mạng lưới đối tác trong và ngoài nước, đồng thời liên tục nâng cao trải nghiệm người dùng qua công nghệ và dịch vụ cá nhân hóa. Chúng tôi tự hào là người bạn đồng hành đáng tin cậy của du khách trên mọi hành trình — từ những chuyến phiêu lưu mạo hiểm đến các kỳ nghỉ dưỡng thư giãn. Sự hài lòng và tin tưởng của khách hàng chính là động lực để Wide Quest tiếp tục vươn xa và khẳng định vị thế trong ngành du lịch hiện đại.
                         </p>
                     </div>
 

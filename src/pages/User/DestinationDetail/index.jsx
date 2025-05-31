@@ -78,7 +78,6 @@ function DestinationDetail() {
             <span className="destination-badge">{destination.badge}</span>
             <p className="destination-price mt-2"><b>Giá từ:</b> {destination.price}</p>
             <p className="destination-description">{destination.description}</p>
-            <button className="btn btn-primary mt-2">Đặt ngay</button>
           </div>
         </div>
 
