@@ -8,6 +8,7 @@ import video from '../../../assets/images/video.mp4';
 import video1 from '../../../assets/images/video1.mp4';
 import background from '../../../assets/images/background.jpg';
 import phone from '../../../assets/images/phone.jpg';
+import { destinationsData } from '../../../data/destinations';
 
 function Home() {
   // Dữ liệu slider
@@ -129,7 +130,7 @@ function Home() {
         </div>
       </section>
       {/* Giới thiệu */}
-      <section className="about-widequest animate-on-scroll">
+      <section className="about-widequest animate-on-scroll" id="about" >
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6 about-image">
@@ -143,7 +144,7 @@ function Home() {
               />
 
             </div>
-            <div className="col-md-6 about-content">
+            <div className="col-md-6 about-content" >
               <h2 className="section-title">Về Wide Quest</h2>
               <p className="section-text">
                 Wide Quest là nền tảng du lịch dành cho những người yêu thích khám phá, trải nghiệm và phiêu lưu.
@@ -160,9 +161,9 @@ function Home() {
             <div className="col-md-6 about-content">
               <h2 className="section-title">Lý do nên chọn chúng tôi</h2>
               <p className="section-text">
-                 Với đội ngũ chuyên nghiệp, lịch trình linh hoạt và những hành trình được thiết kế đặc biệt cho từng cá nhân,
-          Wide Quest là người bạn đồng hành lý tưởng trong mọi chuyến đi của bạn. Chúng tôi cam kết mang lại trải nghiệm
-          an toàn, thú vị và đáng nhớ.
+                Với đội ngũ chuyên nghiệp, lịch trình linh hoạt và những hành trình được thiết kế đặc biệt cho từng cá nhân,
+                Wide Quest là người bạn đồng hành lý tưởng trong mọi chuyến đi của bạn. Chúng tôi cam kết mang lại trải nghiệm
+                an toàn, thú vị và đáng nhớ.
               </p>
             </div>
 
@@ -180,8 +181,8 @@ function Home() {
           </div>
         </div>
       </section>
-   {/* Topp */}
-   <hr />
+      {/* Topp */}
+      <hr />
       <section className="top-destination-section">
         <div className="container">
           <h2 className="top-destination-title">Top Destination</h2>
@@ -434,61 +435,40 @@ function Home() {
         </style>
       </section>
       {/* Điểm đến nổi bật */}
-      <section className="destinations-section animate-on-scroll">
+      <section className="destinations-section animate-on-scroll" id="destinations">
         {/* Google Fonts import cho section này */}
         <hr></hr>
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet" />
         <div className="container">
           <h2 className="section-title text-center">Điểm đến nổi bật</h2>
           <div className="row g-4">
-            <div className="col-md-4">
-              <div className="destination-card improved">
-                <div className="card-image">
-                  <img src="/public/images/destination/sapa.jpeg" alt="Sapa" />
-                  <span className="destination-badge">Hot</span>
-                  <div className="card-overlay">
-                    <Link to="/destinations/sapa" className="overlay-link">Khám phá</Link>
+            {destinationsData.map((destination) => (
+              <div className="col-md-4" key={destination.id}>
+                <div className="destination-card improved">
+                  <div className="card-image">
+                    <img src={destination.image} alt={destination.name} loading="lazy" />
+                    <span
+                      className={`destination-badge ${destination.badge === 'New' ? 'badge-new' : destination.badge === 'Best' ? 'badge-best' : ''
+                        }`}
+                    >
+                      {destination.badge}
+                    </span>
+                    <div className="card-overlay">
+                      <Link to={`/destinations/${destination.id}`} className="overlay-link">
+                        Khám phá
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="card-content">
+                    <h3 className="card-title">{destination.name}</h3>
+                    <p className="card-text">{destination.description}</p>
+                    <div className="destination-price">
+                      <b>Giá từ:</b> {destination.price}
+                    </div>
                   </div>
                 </div>
-                <div className="card-content">
-                  <h3 className="card-title">Sapa</h3>
-                  <p className="card-text">Khám phá núi rừng Tây Bắc, bản sắc dân tộc và cảnh sắc tuyệt đẹp.</p>
-                  <div className="destination-price"><b>Giá từ:</b> 2.500.000đ</div>
-                </div>
               </div>
-            </div>
-            <div className="col-md-4">
-              <div className="destination-card improved">
-                <div className="card-image">
-                  <img src="/public/images/destination/phuquoc.jpg" alt="Phú Quốc" />
-                  <span className="destination-badge badge-new">New</span>
-                  <div className="card-overlay">
-                    <Link to="/destinations/phu-quoc" className="overlay-link">Khám phá</Link>
-                  </div>
-                </div>
-                <div className="card-content">
-                  <h3 className="card-title">Phú Quốc</h3>
-                  <p className="card-text">Thiên đường biển đảo với bãi cát trắng, nước biển trong xanh và hải sản tươi ngon.</p>
-                  <div className="destination-price"><b>Giá từ:</b> 3.200.000đ</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="destination-card improved">
-                <div className="card-image">
-                  <img src="/public/images/destination/dalat.jpg" alt="Đà Lạt" />
-                  <span className="destination-badge badge-best">Best</span>
-                  <div className="card-overlay">
-                    <Link to="/destinations/da-lat" className="overlay-link">Khám phá</Link>
-                  </div>
-                </div>
-                <div className="card-content">
-                  <h3 className="card-title">Đà Lạt</h3>
-                  <p className="card-text">Thành phố ngàn hoa, khí hậu mát mẻ và những trải nghiệm lãng mạn.</p>
-                  <div className="destination-price"><b>Giá từ:</b> 2.800.000đ</div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <style>
