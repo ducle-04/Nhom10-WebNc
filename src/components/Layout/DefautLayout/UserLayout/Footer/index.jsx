@@ -1,35 +1,46 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 function Footer() {
+  // Sử dụng ref để kiểm soát trạng thái đã animate chưa
+  const animatedRef = useRef(false);
+
   useEffect(() => {
-    // Animation effect when scrolling to footer
     const handleScroll = () => {
       const footer = document.querySelector('.footer-container');
       const elements = document.querySelectorAll('.footer-animate-item');
-      
+
       if (footer) {
         const rect = footer.getBoundingClientRect();
         const isVisible = rect.top < window.innerHeight - 100;
-        
+
         if (isVisible) {
-          footer.classList.add('footer-visible');
-          
-          // Animate each element with a delay
-          elements.forEach((el, index) => {
-            setTimeout(() => {
-              el.classList.add('footer-item-visible');
-            }, 150 * index);
-          });
+          if (!animatedRef.current) {
+            footer.classList.add('footer-visible');
+            elements.forEach((el, index) => {
+              setTimeout(() => {
+                el.classList.add('footer-item-visible');
+              }, 150 * index);
+            });
+            animatedRef.current = true;
+          }
+        } else {
+          // Khi footer ra khỏi viewport, reset animation để có thể chạy lại khi lướt tới
+          footer.classList.remove('footer-visible');
+          elements.forEach((el) => el.classList.remove('footer-item-visible'));
+          animatedRef.current = false;
         }
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
-    // Trigger once on load
+    window.addEventListener('resize', handleScroll);
     setTimeout(handleScroll, 300);
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   // Thêm Font Awesome vào <head> khi component mount (đảm bảo icon luôn hoạt động)
@@ -159,25 +170,38 @@ function Footer() {
             box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
             transform: translateY(20px);
             opacity: 0;
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+            transition: transform 0.6s cubic-bezier(.4,2,.6,1), opacity 0.6s cubic-bezier(.4,2,.6,1);
+            /* Animation */
+            will-change: opacity, transform;
           }
-          
           .footer-visible {
             transform: translateY(0);
             opacity: 1;
+            animation: footerFadeIn 0.8s cubic-bezier(.4,2,.6,1) both;
           }
-          
+          @keyframes footerFadeIn {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+          }
+
+          /* Footer item animation */
           .footer-animate-item {
-            transform: translateY(20px);
             opacity: 0;
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.6s cubic-bezier(.4,2,.6,1), transform 0.6s cubic-bezier(.4,2,.6,1);
+            will-change: opacity, transform;
           }
-          
           .footer-item-visible {
-            transform: translateY(0);
             opacity: 1;
+            transform: translateY(0) scale(1);
+            animation: footerItemFadeIn 0.7s cubic-bezier(.4,2,.6,1) both;
           }
-          
+          @keyframes footerItemFadeIn {
+            0% { opacity: 0; transform: translateY(40px) scale(0.98);}
+            60% { opacity: 0.7; transform: translateY(-8px) scale(1.01);}
+            100% { opacity: 1; transform: translateY(0) scale(1);}
+          }
+
           /* Logo Styles */
           .footer-logo {
             height: 45px;

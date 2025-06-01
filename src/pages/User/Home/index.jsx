@@ -9,6 +9,10 @@ import video1 from '../../../assets/images/video1.mp4';
 import background from '../../../assets/images/background.jpg';
 import phone from '../../../assets/images/phone.jpg';
 
+
+
+
+
 function Home() {
   // Dữ liệu slider
   const sliderImages = [
@@ -509,7 +513,7 @@ function Home() {
             cursor: pointer;
           }
           .destination-card.improved:hover {
-            transform: translateY(-12px) scale(1.03);
+            transform: translateY(-12px) scale(1.03);z
             box-shadow: 0 16px 48px rgba(14,93,144,0.18), 0 4px 16px rgba(0,0,0,0.12);
             border-color: var(--primary-color);
           }
@@ -556,7 +560,7 @@ function Home() {
             <div className="col-md-4">
               <div className="testimonial-card improved">
                 <div className="testimonial-avatar">
-                  <img src="/avatar1.jpg" alt="Avatar" />
+                  <img src="/public/images/avatar.jpg" alt="Avatar" />
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-quote">
@@ -580,7 +584,7 @@ function Home() {
             <div className="col-md-4">
               <div className="testimonial-card improved">
                 <div className="testimonial-avatar">
-                  <img src="/avatar2.jpg" alt="Avatar" />
+                  <img src="/public/images/avatar.jpg" alt="Avatar" />
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-quote">
@@ -603,7 +607,7 @@ function Home() {
             <div className="col-md-4">
               <div className="testimonial-card improved">
                 <div className="testimonial-avatar">
-                  <img src="/avatar3.jpg" alt="Avatar" />
+                  <img src="/public/images/avatar.jpg" alt="Avatar" />
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-quote">
