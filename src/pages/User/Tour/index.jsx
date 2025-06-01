@@ -1,40 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toursData } from '../../../data/toursData';
 
 function Tours() {
-    const toursData = [
-        {
-            id: 1,
-            title: "Tour Sapa Mùa Lúa Chín",
-            description: "Khám phá vẻ đẹp Sapa với những cung đường tuyệt đẹp và văn hóa độc đáo.",
-            image: "/images/blog/sapa.jpeg",
-            price: 5000000,
-            duration: 3,
-            location: "Sapa",
-            popularity: 120,
-        },
-        {
-            id: 2,
-            title: "Tour Đà Lạt 5 Ngày",
-            description: "Hành trình khám phá Đà Lạt với các điểm đến nổi bật và không khí trong lành.",
-            image: "/images/blog/dalat-2.jpg",
-            price: 7000000,
-            duration: 5,
-            location: "Đà Lạt",
-            popularity: 200,
-        },
-        {
-            id: 3,
-            title: "Tour Phú Quốc 4 Ngày",
-            description: "Thư giãn tại thiên đường biển Phú Quốc với bãi biển xanh ngọc bích.",
-            image: "/images/blog/phuquoc-3.jpg",
-            price: 6000000,
-            duration: 4,
-            location: "Phú Quốc",
-            popularity: 180,
-        },
-    ];
-
     const [filteredTours, setFilteredTours] = useState(toursData);
 
     const [filters, setFilters] = useState({

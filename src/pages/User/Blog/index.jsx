@@ -38,6 +38,30 @@ function Blog() {
             date: "2025-05-10",
             author: "Le Van C",
         },
+        {
+            id: 4,
+            title: "Khám phá Nha Trang – Thiên đường biển 4 ngày",
+            excerpt: "Tham gia hành trình 4 ngày tại Nha Trang để tận hưởng vẻ đẹp của bãi biển cát vàng, nước trong xanh và các hòn đảo hoang sơ như Hòn Mun, Hòn Tằm. Trải nghiệm lặn ngắm san hô, thư giãn tại Vinpearl Land, và thưởng thức hải sản tươi ngon tại các nhà hàng ven biển. Đừng bỏ lỡ cơ hội khám phá viện Hải dương học và chợ Đầm để cảm nhận nhịp sống sôi động của thành phố biển. Một chuyến đi lý tưởng cho kỳ nghỉ thư giãn và khám phá!",
+            image: [
+                '/images/blog/nhatrang-1.jpg',
+                '/images/blog/nhatrang-2.jpg',
+                '/images/blog/nhatrang-3.jpg',
+            ],
+            date: "2025-05-05",
+            author: "Pham Thi D",
+        },
+        {
+            id: 5,
+            title: "Hội An – Hành trình qua phố cổ đèn lồng",
+            excerpt: "Khám phá phố cổ Hội An với những con phố lung linh ánh đèn lồng, kiến trúc cổ kính và văn hóa truyền thống đậm chất Việt. Dạo bước qua cầu Nhật Bản, thưởng thức cao lầu, mì Quảng, và tham quan Cù Lao Chàm để lặn ngắm san hô. Chuyến đi còn đưa bạn đến các làng nghề truyền thống, nơi bạn có thể tự tay làm đèn lồng. Một trải nghiệm tuyệt vời để cảm nhận sự bình yên và nét đẹp di sản của Hội An.",
+            image: [
+                '/images/blog/hoian-1.jpg',
+                '/images/blog/hoian-2.jpg',
+                '/images/blog/hoian-3.jpg',
+            ],
+            date: "2025-05-01",
+            author: "Hoang Van E",
+        },
     ];
 
     const sectionsRef = useRef([]);
@@ -110,62 +134,61 @@ function Blog() {
             </div>
             <style>
                 {`
-          .blog-section {
-            font-family: 'Be Vietnam Pro', 'Montserrat', Arial, sans-serif;
-            background-color: #f8f9fa;
-          }
-          .blog-section h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #1e3a8a;
-          }
-          .blog-post {
-            background: #fff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-          }
-          .blog-post:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            transform: scale(1.1); 
-          }
-          .image-container {
-            width: 100%;
-            overflow: hidden;
-          }
-          .image-container .d-flex img {
-            flex-grow: 1;
-            max-width: 33.33%; 
-          }
-          .content h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e3a8a;
-          }
-          .content p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-          }
-          .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-          }
-          .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          .author-text {
-            color: #1e3a8a;
-            font-weight: 600;
-            font-size: 0.9rem;
-          }
-          /* Responsive layout */
-          @media (max-width: 767px) {
-            .image-container .d-flex img {
-              max-width: 100%;
-              height: 200px;
-            }
-          }
-        `}
+                    .blog-section {
+                        font-family: 'Be Vietnam Pro', 'Montserrat', Arial, sans-serif;
+                        background-color: #f8f9fa;
+                    }
+                    .blog-section h1 {
+                        font-size: 2.5rem;
+                        font-weight: bold;
+                        color: #1e3a8a;
+                    }
+                    .blog-post {
+                        background: #fff;
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    }
+                    .blog-post:hover {
+                        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                        transform: scale(1.1);
+                    }
+                    .image-container {
+                        width: 100%;
+                        overflow: hidden;
+                    }
+                    .image-container .d-flex img {
+                        flex-grow: 1;
+                        max-width: 33.33%;
+                    }
+                    .content h2 {
+                        font-size: 1.25rem;
+                        font-weight: 600;
+                        color: #1e3a8a;
+                    }
+                    .content p {
+                        font-size: 0.9rem;
+                        line-height: 1.5;
+                    }
+                    .fade-in-section {
+                        opacity: 0;
+                        transform: translateY(30px);
+                        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                    }
+                    .fade-in-section.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                    .author-text {
+                        color: #1e3a8a;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                    }
+                    @media (max-width: 767px) {
+                        .image-container .d-flex img {
+                            max-width: 100%;
+                            height: 200px;
+                        }
+                    }
+                `}
             </style>
         </section>
     );

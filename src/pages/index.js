@@ -6,6 +6,7 @@ import Register from "./User/Register";
 import DestinationDetail from "./User/DestinationDetail";
 import Blog from "./User/Blog";
 import Tours from "./User/Tour";
+import Destination from "./User/Destination";
 import TourDetail from "./User/TourDetail";
 import BookTour from "./User/BookTour";
 import Contact from "./User/Contact";
@@ -14,6 +15,7 @@ import TourReview from "./User/TourReview";
 const PublicPage = [
   { path: "/", component: Home, layout: UserLayout },
   { path: "/register", component: Register, layout: UserLayout },
+  { path: "/destination", component: Destination, layout: UserLayout },
   { path: "/destinations/:destinationId", component: DestinationDetail, layout: UserLayout },
   { path: "/blog", component: Blog, layout: UserLayout },
   { path: "/tours", component: Tours, layout: UserLayout },

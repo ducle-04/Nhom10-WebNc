@@ -63,7 +63,7 @@ function Header() {
               <Link className="nav-link px-3" to="/" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Trang chủ</Link>
             </li>
             <li className="nav-item">
-              <button className="nav-link px-3" onClick={() => handleScroll('destinations')} style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Điểm đến</button>
+              <Link className={`nav-link px-3 ${location.pathname === '/destination' ? 'active' : ''}`} to="/destination" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Điểm đến</Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link px-3 ${location.pathname === '/tours' ? 'active' : ''}`} to="/tours" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Tour</Link>
