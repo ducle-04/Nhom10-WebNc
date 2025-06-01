@@ -1,15 +1,32 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header() {
+  const location = useLocation();
   useEffect(() => {
     if (window.$) {
       window.$('.navbar-toggler').off('click').on('click', function () {
         window.$('#mainNavbar').collapse('toggle');
       });
     }
-  }, []);
+    // Cuộn lên đầu trang khi route thay đổi thành '/'
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
+  const handleScroll = (id) => {
+    // Nếu không ở trang chủ, điều hướng về trang chủ và cuộn
+    if (location.pathname !== '/') {
+      window.location.href = '/#' + id;
+    } else {
+      // Nếu đã ở trang chủ, cuộn mượt đến section
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-2">
       <div className="container">
@@ -46,19 +63,19 @@ function Header() {
               <Link className="nav-link px-3" to="/" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Trang chủ</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link px-3" to="/destinations" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Điểm đến</Link>
+              <button className="nav-link px-3" onClick={() => handleScroll('destinations')} style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Điểm đến</button>
             </li>
             <li className="nav-item">
-              <Link className="nav-link px-3" to="/tours" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Tour</Link>
+              <Link className={`nav-link px-3 ${location.pathname === '/tours' ? 'active' : ''}`} to="/tours" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Tour</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link px-3" to="/blog" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Blog</Link>
+              <Link className={`nav-link px-3 ${location.pathname === '/blog' ? 'active' : ''}`} to="/blog" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Blog</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link px-3" to="/about" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Về Wide Quest</Link>
+              <button className="nav-link px-3" onClick={() => handleScroll('about')} style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Về Wide Quest</button>
             </li>
             <li className="nav-item">
-              <Link className="nav-link px-3" to="/contact" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Liên hệ</Link>
+              <Link className={`nav-link px-3 ${location.pathname === '/contact' ? 'active' : ''}`} to="/contact" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Liên hệ</Link>
             </li>
           </ul>
           {/* Auth buttons */}
