@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { destinationsData } from '../../../data/destinations'; // Giữ đường dẫn theo yêu cầu
+import { destinationsData } from '../../../data/destinations';
 
 function Destination() {
     const [filteredDestinations, setFilteredDestinations] = useState(destinationsData);
@@ -52,6 +52,42 @@ function Destination() {
 
     // Debug: Log destinationsData
     console.log('Destinations Data:', destinationsData);
+
+    // Tích hợp jQuery để xử lý hiệu ứng hover
+    useEffect(() => {
+        if (window.jQuery) {
+            $('.destination-card').hover(
+                function () {
+                    // Gradient bar
+                    $(this).find('.gradient-bar').addClass('active');
+                    // Phóng to hình ảnh
+                    $(this).find('.destination-img').css({
+                        transform: 'scale(1.1)',
+                        transition: 'transform 0.5s ease'
+                    });
+                    // Fade-in nội dung
+                    $(this).find('.content-details').css({
+                        opacity: 1,
+                        transition: 'opacity 0.5s ease'
+                    });
+                },
+                function () {
+                    // Gradient bar
+                    $(this).find('.gradient-bar').removeClass('active');
+                    // Thu nhỏ hình ảnh về ban đầu
+                    $(this).find('.destination-img').css({
+                        transform: 'scale(1)',
+                        transition: 'transform 0.5s ease'
+                    });
+                    // Fade-out nội dung về trạng thái ban đầu
+                    $(this).find('.content-details').css({
+                        opacity: 0.7,
+                        transition: 'opacity 0.5s ease'
+                    });
+                }
+            );
+        }
+    }, []);
 
     return (
         <section className="destinations-section py-5">
@@ -107,30 +143,33 @@ function Destination() {
                         {popularDestinations.map((dest) => (
                             <div key={dest.id} className="col-md-6 mb-4">
                                 <div className="destination-card rounded shadow p-3">
-                                    <div className="row align-items-center">
-                                        <div className="col-md-5">
-                                            <img
-                                                src={dest.image}
-                                                alt={dest.name}
-                                                className="img-fluid rounded"
-                                                style={{ height: '150px', objectFit: 'cover' }}
-                                            />
-                                        </div>
-                                        <div className="col-md-7">
-                                            <h3 className="mb-2">{dest.name}</h3>
-                                            <p className="text-muted mb-2">{dest.description}</p>
-                                            <p className="mb-2"><b>Giá từ:</b> {dest.price}</p>
-                                            <div className="d-flex gap-2">
-                                                <Link to={`/tours?location=${dest.name.toLowerCase()}`} className="btn btn-primary btn-sm details-btn">
-                                                    Xem tour
-                                                </Link>
-                                                <Link
-                                                    to={`/destinations/${dest.id}`}
-                                                    className="btn btn-outline-primary btn-sm details-btn"
-                                                    onClick={() => console.log('Navigating to:', `/destinations/${dest.id}`)}
-                                                >
-                                                    Xem chi tiết
-                                                </Link>
+                                    <div className="gradient-bar"></div>
+                                    <div className="content-wrapper">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-5">
+                                                <img
+                                                    src={dest.image}
+                                                    alt={dest.name}
+                                                    className="destination-img img-fluid rounded"
+                                                    style={{ height: '150px', objectFit: 'cover' }}
+                                                />
+                                            </div>
+                                            <div className="col-md-7 content-details">
+                                                <h3 className="mb-2">{dest.name}</h3>
+                                                <p className="text-muted mb-2">{dest.description}</p>
+                                                <p className="mb-2"><b>Giá từ:</b> {dest.price}</p>
+                                                <div className="d-flex gap-2">
+                                                    <Link to={`/tours?location=${dest.name.toLowerCase()}`} className="btn btn-primary btn-sm details-btn">
+                                                        Xem tour
+                                                    </Link>
+                                                    <Link
+                                                        to={`/destinations/${dest.id}`}
+                                                        className="btn btn-outline-primary btn-sm details-btn"
+                                                        onClick={() => console.log('Navigating to:', `/destinations/${dest.id}`)}
+                                                    >
+                                                        Xem chi tiết
+                                                    </Link>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -150,26 +189,31 @@ function Destination() {
                             {filteredDestinations.map((dest) => (
                                 <div key={dest.id} className="col-md-4 mb-4">
                                     <div className="destination-card rounded shadow p-3">
-                                        <img
-                                            src={dest.image}
-                                            alt={dest.name}
-                                            className="img-fluid rounded mb-3"
-                                            style={{ height: '200px', objectFit: 'cover' }}
-                                        />
-                                        <h3 className="mb-2">{dest.name}</h3>
-                                        <p className="text-muted mb-2">{dest.description}</p>
-                                        <p className="mb-2"><b>Giá từ:</b> {dest.price}</p>
-                                        <div className="d-flex gap-2">
-                                            <Link to={`/tours?location=${dest.name.toLowerCase()}`} className="btn btn-primary btn-sm details-btn">
-                                                Xem tour
-                                            </Link>
-                                            <Link
-                                                to={`/destinations/${dest.id}`}
-                                                className="btn btn-outline-primary btn-sm details-btn"
-                                                onClick={() => console.log('Navigating to:', `/destinations/${dest.id}`)}
-                                            >
-                                                Xem chi tiết
-                                            </Link>
+                                        <div className="gradient-bar"></div>
+                                        <div className="content-wrapper">
+                                            <img
+                                                src={dest.image}
+                                                alt={dest.name}
+                                                className="destination-img img-fluid rounded mb-3"
+                                                style={{ height: '200px', objectFit: 'cover' }}
+                                            />
+                                            <div className="content-details">
+                                                <h3 className="mb-2">{dest.name}</h3>
+                                                <p className="text-muted mb-2">{dest.description}</p>
+                                                <p className="mb-2"><b>Giá từ:</b> {dest.price}</p>
+                                                <div className="d-flex gap-2">
+                                                    <Link to={`/tours?location=${dest.name.toLowerCase()}`} className="btn btn-primary btn-sm details-btn">
+                                                        Xem tour
+                                                    </Link>
+                                                    <Link
+                                                        to={`/destinations/${dest.id}`}
+                                                        className="btn btn-outline-primary btn-sm details-btn"
+                                                        onClick={() => console.log('Navigating to:', `/destinations/${dest.id}`)}
+                                                    >
+                                                        Xem chi tiết
+                                                    </Link>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -232,17 +276,19 @@ function Destination() {
                     .destination-card {
                         background: #fff;
                         transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        position: relative;
                     }
                     .destination-card:hover {
                         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
                         transform: scale(1.05);
                     }
-                    .destination-card img {
+                    .destination-img {
                         width: 100%;
-                        transition: transform 0.3s ease;
+                        transition: transform 0.5s ease; 
                     }
-                    .destination-card:hover img {
-                        transform: scale(1.1);
+                    .content-details {
+                        opacity: 0.7;
+                        transition: opacity 0.5s ease;
                     }
                     .destination-card h3 {
                         font-size: 1.25rem;
@@ -276,6 +322,23 @@ function Destination() {
                     }
                     .details-btn:hover {
                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                    }
+                    .gradient-bar {
+                        height: 4px;
+                        width: 0;
+                        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+                        border-radius: 9999px;
+                        transition: width 0.5s ease;
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                    .gradient-bar.active {
+                        width: 100%;
+                    }
+                    .content-wrapper {
+                        margin-top: 8px; 
                     }
                     @media (max-width: 767px) {
                         .filter-section {

@@ -29,7 +29,7 @@ function Blog() {
         {
             id: 3,
             title: "Hành trình 3 ngày khám phá Phú Quốc",
-            excerpt: "Lịch trình chi tiết cho 3 ngày tại thiên đường biển Phú Quốc với các điểm đến nổi bật như bãi Sao với cát trắng mịn màng, làng chài Hàm Ninh truyền thống, công viên quốc gia Phú Quốc xanh mát, và các khu chợ đêm sầm uất. Bạn sẽ được tận hưởng những trải nghiệm tuyệt vời từ lặn biển ngắm san hô, thưởng thức hải sản tươi sống, đến khám phá văn hóa địa phương độc đáo, tất cả trong không gian biển trời bao la và yên bình.",
+            excerpt: "Lịch trình chi tiết cho 3 ngày tại thiên đường biển Phú Quốc với các điểm nổi bật như bãi Sao với cát trắng mịn màng, làng chài Hàm Ninh truyền thống, công viên quốc gia Phú Quốc xanh mát, và các khu chợ đêm sầm uất. Bạn sẽ được tận hưởng những trải nghiệm tuyệt vời từ lặn biển ngắm san hô, thưởng thức hải sản tươi sống, đến khám phá văn hóa địa phương độc đáo, tất cả trong không gian biển trời bao la và yên bình.",
             image: [
                 '/images/blog/phuquoc-1.jpg',
                 '/images/blog/phuquoc-2.jpg',
@@ -72,6 +72,7 @@ function Blog() {
     };
 
     useEffect(() => {
+        // Intersection Observer 
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -94,6 +95,20 @@ function Blog() {
         };
     }, []);
 
+    // jQuery 
+    useEffect(() => {
+        if (window.jQuery) {
+            $('.blog-post').hover(
+                function () {
+                    $(this).find('.gradient-bar').addClass('active');
+                },
+                function () {
+                    $(this).find('.gradient-bar').removeClass('active');
+                }
+            );
+        }
+    }, []);
+
     return (
         <section className="blog-section py-5">
             <div className="container">
@@ -104,28 +119,31 @@ function Blog() {
                         className="blog-post fade-in-section mb-4 rounded shadow"
                         ref={addToRefs}
                     >
-                        <div className="row align-items-center">
-                            <div className="col-md-3 image-container p-4">
-                                {Array.isArray(post.image) && (
-                                    <div className="d-flex gap-3">
-                                        {post.image.map((img, index) => (
-                                            <img
-                                                key={index}
-                                                src={img}
-                                                alt={`${post.title} ${index + 1}`}
-                                                className="img-fluid rounded"
-                                                style={{ height: '200px', objectFit: 'cover' }}
-                                            />
-                                        ))}
+                        <div className="gradient-bar"></div>
+                        <div className="content-wrapper">
+                            <div className="row align-items-center">
+                                <div className="col-md-3 image-container p-4">
+                                    {Array.isArray(post.image) && (
+                                        <div className="d-flex gap-3">
+                                            {post.image.map((img, index) => (
+                                                <img
+                                                    key={index}
+                                                    src={img}
+                                                    alt={`${post.title} ${index + 1}`}
+                                                    className="img-fluid rounded"
+                                                    style={{ height: '200px', objectFit: 'cover' }}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="col-md-9 content p-4">
+                                    <h2 className="mb-3">{post.title}</h2>
+                                    <p className="text-muted mb-3">{post.excerpt}</p>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <small className="text-muted">Ngày đăng: {post.date}</small>
+                                        <small className="author-text">Tác giả: {post.author}</small>
                                     </div>
-                                )}
-                            </div>
-                            <div className="col-md-9 content p-4">
-                                <h2 className="mb-3">{post.title}</h2>
-                                <p className="text-muted mb-3">{post.excerpt}</p>
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <small className="text-muted">Ngày đăng: {post.date}</small>
-                                    <small className="author-text">Tác giả: {post.author}</small>
                                 </div>
                             </div>
                         </div>
@@ -146,10 +164,28 @@ function Blog() {
                     .blog-post {
                         background: #fff;
                         transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        position: relative;
                     }
                     .blog-post:hover {
                         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-                        transform: scale(1.1);
+                        transform: scale(1.02);
+                    }
+                    .gradient-bar {
+                        height: 4px;
+                        width: 0;
+                        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+                        border-radius: 9999px;
+                        transition: width 0.5s ease;
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                    .gradient-bar.active {
+                        width: 100%;
+                    }
+                    .content-wrapper {
+                        margin-top: 8px; 
                     }
                     .image-container {
                         width: 100%;
@@ -186,6 +222,9 @@ function Blog() {
                         .image-container .d-flex img {
                             max-width: 100%;
                             height: 200px;
+                        }
+                        .image-container .d-flex {
+                            flex-direction: column;
                         }
                     }
                 `}

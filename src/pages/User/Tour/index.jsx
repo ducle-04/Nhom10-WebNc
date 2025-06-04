@@ -63,6 +63,41 @@ function Tours() {
         .sort((a, b) => b.popularity - a.popularity)
         .slice(0, 2);
 
+    // Tích hợp jQuery để xử lý hiệu ứng hover
+    useEffect(() => {
+        if (window.jQuery) {
+            $('.tour-card').hover(
+                function () {
+                    // Gradient bar
+                    $(this).find('.gradient-bar').addClass('active');
+                    // Phóng to hình ảnh
+                    $(this).find('.tour-img').css({
+                        transform: 'scale(1.1)',
+                        transition: 'transform 0.5s ease'
+                    });
+                    // Fade-in nội dung
+                    $(this).find('.content-details').css({
+                        transition: 'opacity 0.5s ease'
+                    });
+                },
+                function () {
+                    // Gradient bar
+                    $(this).find('.gradient-bar').removeClass('active');
+                    // Thu nhỏ hình ảnh về ban đầu
+                    $(this).find('.tour-img').css({
+                        transform: 'scale(1)',
+                        transition: 'transform 0.5s ease'
+                    });
+                    // Fade-out nội dung về trạng thái ban đầu
+                    $(this).find('.content-details').css({
+                        opacity: 0.7,
+                        transition: 'opacity 0.5s ease'
+                    });
+                }
+            );
+        }
+    }, []);
+
     return (
         <section className="tours-section py-5">
             <div className="container">
@@ -157,24 +192,28 @@ function Tours() {
                         {popularTours.map((tour) => (
                             <div key={tour.id} className="col-md-6 mb-4">
                                 <div className="tour-card rounded shadow p-3">
-                                    <div className="row align-items-center">
-                                        <div className="col-md-5">
-                                            <img
-                                                src={tour.image}
-                                                alt={tour.title}
-                                                className="img-fluid rounded"
-                                                style={{ height: '150px', objectFit: 'cover' }}
-                                            />
-                                        </div>
-                                        <div className="col-md-7">
-                                            <h3 className="mb-2">{tour.title}</h3>
-                                            <p className="text-muted mb-2">{tour.description}</p>
-                                            <p className="mb-1"><b>Giá:</b> {tour.price.toLocaleString()} VNĐ</p>
-                                            <p className="mb-1"><b>Thời gian:</b> {tour.duration} ngày</p>
-                                            <p className="mb-2"><b>Địa điểm:</b> {tour.location}</p>
-                                            <Link to={`/tours/${tour.id}`} className="btn btn-primary btn-sm details-btn">
-                                                Xem chi tiết
-                                            </Link>
+                                    {/* Thanh gradient hiệu ứng */}
+                                    <div className="gradient-bar"></div>
+                                    <div className="content-wrapper">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-5">
+                                                <img
+                                                    src={tour.image}
+                                                    alt={tour.title}
+                                                    className="tour-img img-fluid rounded"
+                                                    style={{ height: '150px', objectFit: 'cover' }}
+                                                />
+                                            </div>
+                                            <div className="col-md-7 content-details">
+                                                <h3 className="mb-2">{tour.title}</h3>
+                                                <p className="text-muted mb-2">{tour.description}</p>
+                                                <p className="mb-1"><b>Giá:</b> {tour.price.toLocaleString()} VNĐ</p>
+                                                <p className="mb-1"><b>Thời gian:</b> {tour.duration} ngày</p>
+                                                <p className="mb-2"><b>Địa điểm:</b> {tour.location}</p>
+                                                <Link to={`/tours/${tour.id}`} className="btn btn-primary btn-sm details-btn">
+                                                    Xem chi tiết
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -193,20 +232,26 @@ function Tours() {
                             {filteredTours.map((tour) => (
                                 <div key={tour.id} className="col-md-4 mb-4">
                                     <div className="tour-card rounded shadow p-3">
-                                        <img
-                                            src={tour.image}
-                                            alt={tour.title}
-                                            className="img-fluid rounded mb-3"
-                                            style={{ height: '200px', objectFit: 'cover' }}
-                                        />
-                                        <h3 className="mb-2">{tour.title}</h3>
-                                        <p className="text-muted mb-2">{tour.description}</p>
-                                        <p className="mb-1"><b>Giá:</b> {tour.price.toLocaleString()} VNĐ</p>
-                                        <p className="mb-1"><b>Thời gian:</b> {tour.duration} ngày</p>
-                                        <p className="mb-2"><b>Địa điểm:</b> {tour.location}</p>
-                                        <Link to={`/tours/${tour.id}`} className="btn btn-primary btn-sm details-btn">
-                                            Xem chi tiết
-                                        </Link>
+                                        {/* Thanh gradient hiệu ứng */}
+                                        <div className="gradient-bar"></div>
+                                        <div className="content-wrapper">
+                                            <img
+                                                src={tour.image}
+                                                alt={tour.title}
+                                                className="tour-img img-fluid rounded mb-3"
+                                                style={{ height: '200px', objectFit: 'cover' }}
+                                            />
+                                            <div className="content-details">
+                                                <h3 className="mb-2">{tour.title}</h3>
+                                                <p className="text-muted mb-2">{tour.description}</p>
+                                                <p className="mb-1"><b>Giá:</b> {tour.price.toLocaleString()} VNĐ</p>
+                                                <p className="mb-1"><b>Thời gian:</b> {tour.duration} ngày</p>
+                                                <p className="mb-2"><b>Địa điểm:</b> {tour.location}</p>
+                                                <Link to={`/tours/${tour.id}`} className="btn btn-primary btn-sm details-btn">
+                                                    Xem chi tiết
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -229,17 +274,18 @@ function Tours() {
                     .tour-card {
                         background: #fff;
                         transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        position: relative;
                     }
                     .tour-card:hover {
                         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
                         transform: scale(1.05);
                     }
-                    .tour-card img {
+                    .tour-img {
                         width: 100%;
-                        transition: transform 0.3s ease;
+                        transition: transform 0.5s ease; 
                     }
-                    .tour-card:hover img {
-                        transform: scale(1.1);
+                    .content-details {
+                        transition: opacity 0.5s ease; /* Chuyển đổi mượt mà cho nội dung */
                     }
                     .tour-card h3 {
                         font-size: 1.25rem;
@@ -253,24 +299,52 @@ function Tours() {
                         transition: background-color 0.3s ease, transform 0.3s ease;
                     }
                     .btn-primary:hover {
-                        background-color: #ff9d00; 
+                        background-color: #ff9d00;
                         transform: translateY(-2px);
                     }
                     .search-btn {
                         padding: 10px 20px;
-                        border-radius: 25px; 
+                        border-radius: 25px;
                         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                         font-size: 1rem;
                     }
                     .details-btn {
                         padding: 8px 16px;
-                        border-radius: 20px; 
+                        border-radius: 20px;
                         font-size: 0.9rem;
                         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                         display: inline-block;
                     }
                     .details-btn:hover {
                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                    }
+                    .gradient-bar {
+                        height: 4px;
+                        width: 0;
+                        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+                        border-radius: 9999px;
+                        transition: width 0.5s ease;
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                    .gradient-bar.active {
+                        width: 100%;
+                    }
+                    .content-wrapper {
+                        margin-top: 8px; 
+                    }
+                    @media (max-width: 767px) {
+                        .filter-section {
+                            padding: 15px;
+                        }
+                        .form-control, .form-select, .search-btn {
+                            height: 40px;
+                        }
+                        .form-label {
+                            margin-bottom: 5px;
+                        }
                     }
                 `}
             </style>
