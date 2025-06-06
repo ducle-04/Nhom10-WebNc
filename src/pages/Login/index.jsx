@@ -3,7 +3,7 @@ import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
-    const navigate = useNavigate(); // Hook để điều hướng
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -19,7 +19,6 @@ function Login() {
         }));
     };
 
-    // Trong Login.js
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Login:', formData); // Mô phỏng đăng nhập

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { User } from 'lucide-react'; // Sử dụng icon người dùng từ lucide-react
+import { User } from 'lucide-react';
 
 function Header() {
   const location = useLocation();
@@ -11,13 +11,13 @@ function Header() {
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedIn);
 
-    // Cập nhật trạng thái khi route thay đổi (ví dụ: sau khi đăng nhập)
+    // Cập nhật trạng thái khi route thay đổi 
     if (window.$) {
       window.$('.navbar-toggler').off('click').on('click', function () {
         window.$('#mainNavbar').collapse('toggle');
       });
     }
-    // Cuộn lên đầu trang khi route thay đổi thành '/'
+    // Đầu trang khi route thay đổi thành '/'
     if (location.pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -34,7 +34,7 @@ function Header() {
     }
   };
 
-  // Hàm đăng xuất (nếu cần)
+  // Hàm đăng xuất
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
@@ -107,7 +107,7 @@ function Header() {
                     alignItems: 'center',
                   }}
                 >
-                  <User size={20} /> {/* Icon người dùng */}
+                  <User size={20} />
                 </Link>
                 <button
                   className="btn btn-dark text-white"

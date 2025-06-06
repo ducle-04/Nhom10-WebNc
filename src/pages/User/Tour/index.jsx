@@ -285,7 +285,7 @@ function Tours() {
                         transition: transform 0.5s ease; 
                     }
                     .content-details {
-                        transition: opacity 0.5s ease; /* Chuyển đổi mượt mà cho nội dung */
+                        transition: opacity 0.5s ease; 
                     }
                     .tour-card h3 {
                         font-size: 1.25rem;
