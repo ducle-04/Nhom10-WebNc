@@ -536,7 +536,7 @@ function Home() {
             <div className="col-md-4">
               <div className="testimonial-card improved">
                 <div className="testimonial-avatar">
-                  <img src="/avatar1.jpg" alt="Avatar" />
+                  <img src="/images/avatar/avatar1.jpg" alt="Avatar" />
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-quote">
@@ -560,7 +560,7 @@ function Home() {
             <div className="col-md-4">
               <div className="testimonial-card improved">
                 <div className="testimonial-avatar">
-                  <img src="/avatar2.jpg" alt="Avatar" />
+                  <img src="/images/avatar/avatar2.png" alt="Avatar" />
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-quote">
@@ -583,7 +583,7 @@ function Home() {
             <div className="col-md-4">
               <div className="testimonial-card improved">
                 <div className="testimonial-avatar">
-                  <img src="/avatar3.jpg" alt="Avatar" />
+                  <img src="/images/avatar/avatar3.jpg" alt="Avatar" />
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-quote">
