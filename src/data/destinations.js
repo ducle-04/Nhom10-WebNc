@@ -1,4 +1,3 @@
-//src/data/destinationsData
 export const destinationsData = [
     {
         id: 'sapa',
@@ -8,7 +7,6 @@ export const destinationsData = [
         description: 'Khám phá núi rừng Tây Bắc, bản sắc dân tộc và cảnh sắc tuyệt đẹp.',
         price: '2.500.000đ',
         detailedDescription: 'Khám phá Sapa – nơi núi rừng hùng vĩ hòa quyện cùng văn hóa đặc sắc, với ruộng bậc thang, đỉnh Fansipan, bản làng truyền thống và ẩm thực độc đáo, là hành trình lý tưởng để trốn khỏi phố thị và hòa mình vào thiên nhiên nguyên sơ. Đặt tour ngay để trải nghiệm!',
-
         hotels: ['Sapa Horizon Hotel', 'Topas Ecolodge'],
         tours: ['Tour 2N1D Sapa - Fansipan', 'Tour 3N2D Sapa - Bản Cát Cát'],
         itinerary: [
@@ -35,12 +33,11 @@ export const destinationsData = [
     {
         id: 'phu-quoc',
         name: 'Phú Quốc',
-        image: '/images/destination/phuquoc.jpg',
+        image: '/images/destination/phuquoc-1.jpg',
         badge: 'New',
         description: 'Thiên đường biển đảo với bãi cát trắng, nước biển trong xanh và hải sản tươi ngon.',
         price: '3.200.000đ',
         detailedDescription: 'Phú Quốc – thiên đường biển đảo nổi tiếng với bãi cát trắng trải dài mịn màng, làn nước biển trong xanh như ngọc bích, cùng nguồn hải sản tươi ngon đa dạng, nơi bạn có thể tận hưởng kỳ nghỉ thư giãn tuyệt vời, khám phá thiên nhiên hoang sơ và văn hóa địa phương đặc sắc.',
-        activities: ['Lặn ngắm san hô', 'Tham quan làng chài Hàm Ninh', 'Thưởng thức hải sản'],
         hotels: ['Vinpearl Resort & Spa', 'Sunset Beach Resort'],
         tours: ['Tour 3N2D Phú Quốc - Bãi Sao', 'Tour 4N3D Phú Quốc - VinWonders'],
         itinerary: [
@@ -67,12 +64,11 @@ export const destinationsData = [
     {
         id: 'da-lat',
         name: 'Đà Lạt',
-        image: '/images/destination/dalat.jpg',
+        image: '/images/destination/dalat-2.jpg',
         badge: 'Best',
         description: 'Thành phố ngàn hoa, khí hậu mát mẻ và những trải nghiệm lãng mạn.',
         price: '2.800.000đ',
         detailedDescription: 'Đà Lạt – thành phố ngàn hoa rực rỡ với khí hậu mát mẻ quanh năm, nơi lý tưởng để tận hưởng không gian lãng mạn, khám phá những đồi thông xanh ngát, hồ nước trong veo và thưởng thức ẩm thực độc đáo giữa khung cảnh thơ mộng.',
-        activities: ['Tham quan Thung Lũng Tình Yêu', 'Chèo thuyền trên Hồ Xuân Hương', 'Khám phá Thác Datanla'],
         hotels: ['Ana Mandara Villas', 'Dalat Palace Hotel'],
         tours: ['Tour 2N1D Đà Lạt - Thác Datanla', 'Tour 3N2D Đà Lạt - Hồ Xuân Hương'],
         itinerary: [
@@ -94,6 +90,99 @@ export const destinationsData = [
             '/images/destination/dalat-1.jpg',
             '/images/destination/dalat-2.jpg',
             '/images/destination/dalat-3.jpg',
+        ],
+    },
+    {
+        id: 'ha-noi',
+        name: 'Hà Nội',
+        image: '/images/destination/hanoi-1.jpg',
+        badge: 'Popular',
+        description: 'Thủ đô ngàn năm văn hiến với di tích lịch sử và ẩm thực đặc sắc.',
+        price: '2.200.000đ',
+        detailedDescription: 'Hà Nội – thủ đô ngàn năm văn hiến, nơi giao thoa giữa truyền thống và hiện đại, mang đến trải nghiệm độc đáo với các di tích lịch sử như Văn Miếu, Hồ Gươm, cùng ẩm thực đường phố hấp dẫn như phở, bún chả, và cà phê trứng.',
+        hotels: ['Sofitel Legend Metropole', 'Hanoi La Siesta Hotel'],
+        tours: ['Tour 2N1D Hà Nội - Văn Miếu', 'Tour 3N2D Hà Nội - Phố Cổ'],
+        itinerary: [
+            { day: 1, description: 'Đến Hà Nội, tham quan Hồ Gươm và phố cổ.' },
+            { day: 2, description: 'Tham quan Văn Miếu, Lăng Bác và thưởng thức phở.' },
+            { day: 3, description: 'Khám phá chợ Đồng Xuân và trở về.' },
+        ],
+        reviews: [
+            { user: 'Trương Văn G', rating: 4.6, comment: 'Phố cổ rất thú vị, đồ ăn ngon và rẻ!' },
+            { user: 'Đỗ Thị H', rating: 4.3, comment: 'Giao thông hơi đông, nhưng văn hóa rất đặc sắc.' },
+        ],
+        weather: 'Mùa hè nóng, trung bình 28-35°C. Mùa đông lạnh, 10-20°C. Xuân và thu mát mẻ.',
+        travelTips: [
+            'Thử cà phê trứng tại phố cổ.',
+            'Mang ô hoặc áo mưa vào mùa mưa (tháng 6-8).',
+            'Đi bộ hoặc xe đạp quanh Hồ Gươm để cảm nhận không khí.',
+        ],
+        gallery: [
+            '/images/destination/hanoi-1.jpg',
+            '/images/destination/hanoi-2.jpg',
+            '/images/destination/hanoi-3.jpg',
+        ],
+    },
+    {
+        id: 'hoi-an',
+        name: 'Hội An',
+        image: '/images/destination/hoian-1.jpg',
+        badge: 'Classic',
+        description: 'Phố cổ quyến rũ với đèn lồng lung linh và văn hóa truyền thống.',
+        price: '2.700.000đ',
+        detailedDescription: 'Hội An – di sản văn hóa thế giới với phố cổ quyến rũ, những con phố đèn lồng lung linh, kiến trúc cổ kính, và ẩm thực đặc trưng như cao lầu, mì Quảng, là điểm đến hoàn hảo cho những ai yêu thích lịch sử và sự bình yên.',
+        hotels: ['Anantara Hoi An Resort', 'Hoi An Historic Hotel'],
+        tours: ['Tour 2N1D Hội An - Phố Cổ', 'Tour 3N2D Hội An - Cù Lao Chàm'],
+        itinerary: [
+            { day: 1, description: 'Đến Hội An, dạo phố cổ và ngắm đèn lồng buổi tối.' },
+            { day: 2, description: 'Tham quan Cù Lao Chàm, lặn ngắm san hô.' },
+            { day: 3, description: 'Mua sắm đồ thủ công và trở về.' },
+        ],
+        reviews: [
+            { user: 'Vũ Văn I', rating: 4.9, comment: 'Phố cổ đẹp như tranh, rất đáng để ghé!' },
+            { user: 'Lý Thị K', rating: 4.5, comment: 'Đồ ăn ngon, nhưng hơi đông khách vào cuối tuần.' },
+        ],
+        weather: 'Nắng ấm, trung bình 25-30°C. Mùa mưa từ tháng 9 đến tháng 1.',
+        travelTips: [
+            'Thử cao lầu và bánh mì Hội An.',
+            'Đi dạo phố cổ vào buổi tối để ngắm đèn lồng.',
+            'Mang giày thoải mái để đi bộ nhiều.',
+        ],
+        gallery: [
+            '/images/destination/hoian-1.jpg',
+            '/images/destination/hoian-2.jpg',
+            '/images/destination/hoian-3.jpg',
+        ],
+    },
+    {
+        id: 'nha-trang',
+        name: 'Nha Trang',
+        image: '/images/destination/nhatrang-1.jpg',
+        badge: 'Relax',
+        description: 'Thành phố biển sôi động với bãi cát vàng và các đảo tuyệt đẹp.',
+        price: '3.000.000đ',
+        detailedDescription: 'Nha Trang – thành phố biển sôi động với bãi cát vàng óng ánh, nước biển trong xanh, và các hòn đảo tuyệt đẹp như Hòn Mun, Hòn Tằm, là điểm đến lý tưởng cho những ai yêu thích biển cả, lặn ngắm san hô và các hoạt động giải trí dưới nước.',
+        hotels: ['InterContinental Nha Trang', 'Amiana Resort'],
+        tours: ['Tour 3N2D Nha Trang - Hòn Mun', 'Tour 4N3D Nha Trang - Vinpearl Land'],
+        itinerary: [
+            { day: 1, description: 'Đến Nha Trang, thư giãn tại bãi biển và check-in khách sạn.' },
+            { day: 2, description: 'Tham quan Hòn Mun, lặn ngắm san hô.' },
+            { day: 3, description: 'Tham quan Vinpearl Land và trở về.' },
+        ],
+        reviews: [
+            { user: 'Bùi Văn L', rating: 4.7, comment: 'Biển đẹp, nhiều hoạt động thú vị!' },
+            { user: 'Nguyễn Thị M', rating: 4.4, comment: 'Dịch vụ tốt, nhưng giá vé Vinpearl hơi cao.' },
+        ],
+        weather: 'Nắng ấm quanh năm, trung bình 26-32°C. Mùa mưa từ tháng 10 đến tháng 12.',
+        travelTips: [
+            'Mang đồ bơi và kính lặn để khám phá biển.',
+            'Thử hải sản tươi tại các nhà hàng ven biển.',
+            'Đặt vé Vinpearl Land sớm để tiết kiệm chi phí.',
+        ],
+        gallery: [
+            '/images/destination/nhatrang-1.jpg',
+            '/images/destination/nhatrang-2.jpg',
+            '/images/destination/nhatrang-3.jpg',
         ],
     },
 ];
