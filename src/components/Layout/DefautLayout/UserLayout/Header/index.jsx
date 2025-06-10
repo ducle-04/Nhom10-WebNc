@@ -5,11 +5,32 @@ import { User } from 'lucide-react';
 function Header() {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Trạng thái đăng nhập
+  const [userName, setUserName] = useState('');
+  const [userTours, setUserTours] = useState([]);
 
   useEffect(() => {
     // Kiểm tra trạng thái đăng nhập từ localStorage khi component mount
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setIsLoggedIn(loggedIn);
+
+    // Lấy tên người dùng và tour đã đặt nếu đã đăng nhập
+    if (loggedIn) {
+      const name = localStorage.getItem('userName') || '';
+      setUserName(name);
+
+      // Lấy danh sách tour đã đặt từ localStorage (giả sử lưu dưới key 'bookedTours')
+      let tours = [];
+      try {
+        const stored = localStorage.getItem('bookedTours');
+        if (stored) {
+          tours = JSON.parse(stored);
+        }
+      } catch {}
+      setUserTours(Array.isArray(tours) ? tours : []);
+    } else {
+      setUserName('');
+      setUserTours([]);
+    }
 
     // Cập nhật trạng thái khi route thay đổi 
     if (window.$) {
@@ -84,7 +105,7 @@ function Header() {
               <Link className={`nav-link px-3 ${location.pathname === '/blog' ? 'active' : ''}`} to="/blog" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Blog</Link>
             </li>
             <li className="nav-item">
-              <button className="nav-link px-3" onClick={() => handleScroll('about')} style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Về Wide Quest</button>
+              <Link className={`nav-link px-3 ${location.pathname === '/about' ? 'active' : ''}`} to="/about" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Về chúng tôi</Link>
             </li>
             <li className="nav-item">
               <Link className={`nav-link px-3 ${location.pathname === '/contact' ? 'active' : ''}`} to="/contact" style={{ fontWeight: 600, fontSize: 17, color: '#1a2233' }}>Liên hệ</Link>
@@ -93,36 +114,48 @@ function Header() {
           {/* Auth buttons or User icon */}
           <div className="d-flex ms-lg-3 mt-3 mt-lg-0 align-items-center">
             {isLoggedIn ? (
-              <>
-                <Link
-                  to="/profile" // Route giả định cho trang profile
-                  className="btn btn-outline-dark me-2"
+              <div className="dropdown">
+                <button
+                  className="btn btn-outline-dark me-2 dropdown-toggle d-flex align-items-center"
                   style={{
                     fontWeight: 600,
                     fontSize: 16,
                     borderRadius: 24,
                     padding: '6px 12px',
                     borderWidth: 2,
-                    display: 'flex',
-                    alignItems: 'center',
                   }}
+                  type="button"
+                  id="userDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  <User size={20} />
-                </Link>
-                <button
-                  className="btn btn-dark text-white"
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 16,
-                    borderRadius: 24,
-                    padding: '6px 22px',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                  }}
-                  onClick={handleLogout}
-                >
-                  Đăng xuất
+                  <User size={20} className="me-2" />
+                  <span>{userName}</span>
                 </button>
-              </>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" style={{minWidth: 260}}>
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      <User size={16} className="me-2" />
+                      Thông tin cá nhân
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/bookedtours">
+                      <span className="fw-bold text-secondary" style={{fontSize: 15}}>Tour đã đặt</span>
+                    </Link>
+                  </li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={handleLogout}
+                      style={{fontWeight: 600}}
+                    >
+                      Đăng xuất
+                    </button>
+                  </li>
+                </ul>
+              </div>
             ) : (
               <>
                 <Link

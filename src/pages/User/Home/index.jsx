@@ -35,6 +35,7 @@ function Home() {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(0);
 
   // Hàm chuyển slide
   const nextSlide = () => {
@@ -440,94 +441,142 @@ function Home() {
       </section>
       {/* Điểm đến nổi bật */}
       <section className="destinations-section animate-on-scroll" id="destinations">
-        {/* Google Fonts import cho section này */}
-        <hr></hr>
+        <hr />
         <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet" />
         <div className="container">
           <h2 className="section-title text-center">Điểm đến nổi bật</h2>
-          <div className="row g-4">
-            {destinationsData.map((destination) => (
-              <div className="col-md-4" key={destination.id}>
-                <div className="destination-card improved">
-                  <div className="card-image">
-                    <img src={destination.image} alt={destination.name} loading="lazy" />
-                    <span
-                      className={`destination-badge ${destination.badge === 'New' ? 'badge-new' : destination.badge === 'Best' ? 'badge-best' : ''
-                        }`}
-                    >
-                      {destination.badge}
-                    </span>
-                    <div className="card-overlay">
-                      <Link to={`/destinations/${destination.id}`} className="overlay-link">
-                        Khám phá
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="card-content">
-                    <h3 className="card-title">{destination.name}</h3>
-                    <p className="card-text">{destination.description}</p>
-                    <div className="destination-price">
-                      <b>Giá từ:</b> {destination.price}
-                    </div>
+          <div className="destination-slider-wrapper">
+            <button
+              className="destination-slider-nav prev"
+              onClick={() => setSlideIndex((prev) => prev === 0 ? Math.ceil(destinationsData.length / 3) - 1 : prev - 1)}
+              aria-label="Trước"
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <div className="destination-slider">
+              {Array.from({ length: Math.ceil(destinationsData.length / 3) }).map((_, slideIdx) => (
+                <div
+                  key={slideIdx}
+                  className={`destination-slide${slideIdx === slideIndex ? ' active' : ''}`}
+                >
+                  <div className="row g-4">
+                    {destinationsData.slice(slideIdx * 3, slideIdx * 3 + 3).map((destination) => (
+                      <div className="col-md-4" key={destination.id}>
+                        <div className="destination-card improved">
+                          <div className="card-image">
+                            <img src={destination.image} alt={destination.name} loading="lazy" />
+                            <span
+                              className={`destination-badge ${destination.badge === 'New' ? 'badge-new' : destination.badge === 'Best' ? 'badge-best' : ''
+                                }`}
+                            >
+                              {destination.badge}
+                            </span>
+                            <div className="card-overlay">
+                              <Link to={`/destinations/${destination.id}`} className="overlay-link">
+                                Khám phá
+                              </Link>
+                            </div>
+                          </div>
+                          <div className="card-content">
+                            <h3 className="card-title">{destination.name}</h3>
+                            <p className="card-text">{destination.description}</p>
+                            <div className="destination-price">
+                              <b>Giá từ:</b> {destination.price}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              ))}
+            </div>
+            <button
+              className="destination-slider-nav next"
+              onClick={() => setSlideIndex((prev) => prev === Math.ceil(destinationsData.length / 3) - 1 ? 0 : prev + 1)}
+              aria-label="Sau"
+            >
+              <ChevronRight size={28} />
+            </button>
+          </div>
+          <div className="destination-slider-dots text-center mt-3">
+            {Array.from({ length: Math.ceil(destinationsData.length / 3) }).map((_, idx) => (
+              <button
+                key={idx}
+                className={`dot${idx === slideIndex ? ' active' : ''}`}
+                onClick={() => setSlideIndex(idx)}
+                aria-label={`Slide ${idx + 1}`}
+              ></button>
             ))}
           </div>
         </div>
         <style>
           {`
-          .destinations-section, .destinations-section * {
-            font-family: 'Be Vietnam Pro', 'Montserrat', Arial, sans-serif !important;
-          }
-          .destination-card.improved {
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(14,93,144,0.12), 0 1.5px 8px rgba(0,0,0,0.08);
-            border: 2px solid #e3eaf3;
-            background: #fff;
-            transition: box-shadow 0.35s cubic-bezier(.4,2,.6,1), transform 0.25s cubic-bezier(.4,2,.6,1);
+          .destination-slider-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 10px;
-            height: 100%;
-            position: relative;
-            cursor: pointer;
           }
-          .destination-card.improved:hover {
-            transform: translateY(-12px) scale(1.03);z
-            box-shadow: 0 16px 48px rgba(14,93,144,0.18), 0 4px 16px rgba(0,0,0,0.12);
-            border-color: var(--primary-color);
-          }
-          .destination-card.improved .card-image {
-            position: relative;
-            overflow: hidden;
-            height: 300px; 
-            border-radius: 18px 18px 0 0;
-            background: #f5f8fa;
-          }
-          .destination-card.improved .card-image img {
+          .destination-slider {
             width: 100%;
-            height: 300px; /* tăng chiều cao ảnh */
-            object-fit: cover;
-            border-radius: 18px 18px 0 0;
-            transition: transform 0.7s cubic-bezier(.4,2,.6,1);
-            filter: brightness(0.97) contrast(1.05);
+            overflow: hidden;
+            position: relative;
           }
-          /* Đảm bảo media query không ghi đè ở desktop */
-          @media (max-width: 992px) {
-            .destination-card.improved .card-image {
-              height: 220px;
-            }
-            .destination-card.improved .card-image img {
-              height: 220px;
-            }
+          .destination-slide {
+            display: none;
+            transition: opacity 0.5s;
           }
-          @media (max-width: 576px) {
-            .destination-card.improved .card-image {
-              height: 140px;
-            }
-            .destination-card.improved .card-image img {
-              height: 140px;
-            }
+          .destination-slide.active {
+            display: block;
+            animation: fadeInSlide 0.7s;
+          }
+          @keyframes fadeInSlide {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+          }
+          .destination-slider-nav {
+            background: #fff;
+            border: 1.5px solid #e3eaf3;
+            color: #0e5d90;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(14,93,144,0.07);
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+          }
+          .destination-slider-nav.prev {
+            left: -22px;
+          }
+          .destination-slider-nav.next {
+            right: -22px;
+          }
+          .destination-slider-nav:hover {
+            background: #f5f8fa;
+            box-shadow: 0 4px 16px rgba(14,93,144,0.13);
+          }
+          .destination-slider-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e3eaf3;
+            margin: 0 5px;
+            border: none;
+            display: inline-block;
+            transition: background 0.2s, transform 0.2s;
+          }
+          .destination-slider-dots .dot.active {
+            background: #0e5d90;
+            transform: scale(1.2);
           }
           `}
         </style>

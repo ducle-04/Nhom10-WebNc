@@ -10,6 +10,26 @@ function Login() {
         rememberMe: false,
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [errors, setErrors] = useState({});
+
+    // Fake user data
+    let users = [
+        { username: 'admin', password: 'admin123', role: 'admin', name: 'Quản trị viên' },
+        { username: 'user1', password: 'user123', role: 'user', name: 'Người dùng 1' },
+        { username: 'user2', password: 'user456', role: 'user', name: 'Người dùng 2' },
+    ];
+    // Lấy thêm user từ localStorage (nếu có)
+    const storedUsers = window.localStorage.getItem('users');
+    if (storedUsers) {
+        try {
+            const parsed = JSON.parse(storedUsers);
+            if (Array.isArray(parsed)) {
+                users = users.concat(parsed);
+            }
+        } catch (e) {
+            // ignore parse error
+        }
+    }
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -17,14 +37,87 @@ function Login() {
             ...prevState,
             [name]: type === 'checkbox' ? checked : value,
         }));
+
+        // Kiểm tra hợp lệ ngay khi nhập bằng jQuery
+        if (window.$) {
+            let $ = window.$;
+            if (name === 'username') {
+                if (!value.trim()) {
+                    $('#username').addClass('is-invalid');
+                    $('#usernameError').text('Vui lòng nhập tên đăng nhập!');
+                } else {
+                    $('#username').removeClass('is-invalid');
+                    $('#usernameError').text('');
+                }
+            }
+            if (name === 'password') {
+                if (!value) {
+                    $('#password').addClass('is-invalid');
+                    $('#passwordError').text('Vui lòng nhập mật khẩu!');
+                } else {
+                    $('#password').removeClass('is-invalid');
+                    $('#passwordError').text('');
+                }
+            }
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Login:', formData); // Mô phỏng đăng nhập
-        // Giả sử đăng nhập thành công, lưu trạng thái và chuyển hướng
-        localStorage.setItem('isLoggedIn', 'true');
-        navigate('/');
+        let newErrors = {};
+        // Kiểm tra hợp lệ bằng jQuery
+        if (window.$) {
+            const $ = window.$;
+            let valid = true;
+            if (!formData.username.trim()) {
+                $('#username').addClass('is-invalid');
+                $('#usernameError').text('Vui lòng nhập tên đăng nhập!');
+                valid = false;
+            } else {
+                $('#username').removeClass('is-invalid');
+                $('#usernameError').text('');
+            }
+            if (!formData.password) {
+                $('#password').addClass('is-invalid');
+                $('#passwordError').text('Vui lòng nhập mật khẩu!');
+                valid = false;
+            } else {
+                $('#password').removeClass('is-invalid');
+                $('#passwordError').text('');
+            }
+            if (!valid) return;
+        }
+        // Fake login check
+        const found = users.find(
+            (u) => u.username === formData.username && u.password === formData.password
+        );
+        if (found) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userRole', found.role);
+            localStorage.setItem('userName', found.name);
+            alert(`Đăng nhập thành công với vai trò: ${found.role === 'admin' ? 'Quản trị viên' : 'Người dùng'}`);
+            // Điều hướng bằng jQuery
+            if (window.$) {
+                if (found.role === 'admin') {
+                    window.$(document).ready(function () {
+                        window.location.href = '/admin';
+                    });
+                } else {
+                    window.$(document).ready(function () {
+                        window.location.href = '/';
+                    });
+                }
+            } else {
+                // fallback nếu không có jQuery
+                if (found.role === 'admin') {
+                    window.location.href = '/admin';
+                } else {
+                    window.location.href = '/';
+                }
+            }
+        } else {
+            alert('Tên đăng nhập hoặc mật khẩu không đúng!');
+        }
     };
 
     const customStyles = {
@@ -92,41 +185,44 @@ function Login() {
                             <div className="card-body p-5">
                                 {/* Header */}
                                 <div className="text-center mb-4">
-                                    <h2 className="card-title fw-bold text-dark mb-2">Welcome Back</h2>
-                                    <p className="text-muted">Sign in to your account to continue</p>
+                                    <h2 className="card-title fw-bold text-dark mb-2">Chào mừng trở lại</h2>
+                                    <p className="text-muted">Đăng nhập để tiếp tục sử dụng hệ thống</p>
                                 </div>
 
                                 {/* Username Field */}
                                 <div className="mb-3">
-                                    <label className="form-label fw-semibold text-dark">Username</label>
+                                    <label className="form-label fw-semibold text-dark">Tên đăng nhập</label>
                                     <div style={inputGroupStyle}>
                                         <User size={20} style={inputIconStyle} />
                                         <input
                                             type="text"
                                             name="username"
+                                            id="username"
                                             value={formData.username}
                                             onChange={handleChange}
-                                            className="form-control form-control-lg"
+                                            className={`form-control form-control-lg${errors.username ? ' is-invalid' : ''}`}
                                             style={inputStyle}
-                                            placeholder="Enter your username"
+                                            placeholder="Nhập tên đăng nhập"
                                             required
                                         />
                                     </div>
+                                    <div id="usernameError" className="invalid-feedback d-block">{errors.username}</div>
                                 </div>
 
                                 {/* Password Field */}
                                 <div className="mb-3">
-                                    <label className="form-label fw-semibold text-dark">Password</label>
+                                    <label className="form-label fw-semibold text-dark">Mật khẩu</label>
                                     <div style={inputGroupStyle}>
                                         <Lock size={20} style={inputIconStyle} />
                                         <input
                                             type={showPassword ? 'text' : 'password'}
                                             name="password"
+                                            id="password"
                                             value={formData.password}
                                             onChange={handleChange}
-                                            className="form-control form-control-lg"
+                                            className={`form-control form-control-lg${errors.password ? ' is-invalid' : ''}`}
                                             style={{ ...inputStyle, paddingRight: '45px' }}
-                                            placeholder="Enter your password"
+                                            placeholder="Nhập mật khẩu"
                                             required
                                         />
                                         <button
@@ -146,6 +242,7 @@ function Login() {
                                             {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                         </button>
                                     </div>
+                                    <div id="passwordError" className="invalid-feedback d-block">{errors.password}</div>
                                 </div>
 
                                 {/* Remember Me & Forgot Password */}
@@ -160,16 +257,16 @@ function Login() {
                                             id="rememberMe"
                                         />
                                         <label className="form-check-label text-dark" htmlFor="rememberMe">
-                                            Remember me
+                                            Ghi nhớ đăng nhập
                                         </label>
                                     </div>
                                     <button
                                         type="button"
-                                        onClick={() => console.log('Forgot password clicked')}
+                                        onClick={() => alert('Vui lòng liên hệ quản trị viên để lấy lại mật khẩu!')}
                                         className="btn btn-link p-0 text-decoration-none fw-semibold"
                                         style={{ color: '#667eea' }}
                                     >
-                                        Forgot password?
+                                        Quên mật khẩu?
                                     </button>
                                 </div>
 
@@ -188,7 +285,7 @@ function Login() {
                                         e.target.style.boxShadow = 'none';
                                     }}
                                 >
-                                    Sign In
+                                    Đăng nhập
                                 </button>
 
                                 {/* Divider */}
@@ -198,7 +295,7 @@ function Login() {
                                         className="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted"
                                         style={{ fontSize: '14px' }}
                                     >
-                                        Or continue with
+                                        Hoặc đăng nhập bằng
                                     </span>
                                 </div>
 
@@ -206,7 +303,7 @@ function Login() {
                                 <div className="d-flex justify-content-center gap-3 mb-4">
                                     <button
                                         type="button"
-                                        onClick={() => console.log('Facebook login')}
+                                        onClick={() => alert('Chức năng đang phát triển')}
                                         className="btn"
                                         style={socialButtonStyle}
                                         onMouseOver={(e) => {
@@ -224,7 +321,7 @@ function Login() {
                                     </button>
                                     <button
                                         type="button"
-                                        onClick={() => console.log('Google login')}
+                                        onClick={() => alert('Chức năng đang phát triển')}
                                         className="btn"
                                         style={socialButtonStyle}
                                         onMouseOver={(e) => {
@@ -245,7 +342,7 @@ function Login() {
                                     </button>
                                     <button
                                         type="button"
-                                        onClick={() => console.log('GitHub login')}
+                                        onClick={() => alert('Chức năng đang phát triển')}
                                         className="btn"
                                         style={socialButtonStyle}
                                         onMouseOver={(e) => {
@@ -264,9 +361,9 @@ function Login() {
                                 </div>
 
                                 <p className="text-center text-muted mb-0">
-                                    Don't have an account?{' '}
+                                    Chưa có tài khoản?{' '}
                                     <Link to="/register" className="btn btn-link p-0 text-decoration-none fw-semibold" style={{ color: '#667eea' }}>
-                                        Create one now
+                                        Đăng ký ngay
                                     </Link>
                                 </p>
                             </div>
@@ -274,6 +371,32 @@ function Login() {
                     </div>
                 </div>
             </div>
+            {/* Thêm jQuery và script kiểm soát input */}
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+            <script dangerouslySetInnerHTML={{
+                __html: `
+                $(document).ready(function() {
+                    $('#username').on('input', function() {
+                        if (!$(this).val().trim()) {
+                            $(this).addClass('is-invalid');
+                            $('#usernameError').text('Vui lòng nhập tên đăng nhập!');
+                        } else {
+                            $(this).removeClass('is-invalid');
+                            $('#usernameError').text('');
+                        }
+                    });
+                    $('#password').on('input', function() {
+                        if (!$(this).val()) {
+                            $(this).addClass('is-invalid');
+                            $('#passwordError').text('Vui lòng nhập mật khẩu!');
+                        } else {
+                            $(this).removeClass('is-invalid');
+                            $('#passwordError').text('');
+                        }
+                    });
+                });
+                `
+            }} />
         </div>
     );
 }

@@ -55,7 +55,7 @@ function BookTour() {
                                     <p><b>Giá mỗi người:</b> {tour.price.toLocaleString()} VNĐ</p>
                                 </div>
                                 <div className="col-md-6">
-                                    <p><b>Tổng chi phí (tạm tính):</b> {(tour.price * formData.numberOfPeople).toLocaleString()} VNĐ</p>
+                                    <p><b>Tổng chi phí (tạm tính):</b> <span id="totalPrice">{(tour.price * formData.numberOfPeople).toLocaleString()} VNĐ</span></p>
                                 </div>
                             </div>
 
@@ -66,6 +66,7 @@ function BookTour() {
                                         type="number"
                                         className="form-control"
                                         name="numberOfPeople"
+                                        id="numberOfPeople"
                                         value={formData.numberOfPeople}
                                         onChange={handleChange}
                                         min="1"
@@ -253,6 +254,21 @@ function BookTour() {
                     }
                 `}
             </style>
+            {/* Thêm script jQuery để tính tổng chi phí */}
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+            <script dangerouslySetInnerHTML={{
+                __html: `
+                $(document).ready(function() {
+                    var pricePerPerson = ${tour.price};
+                    $('#numberOfPeople').on('input', function() {
+                        var num = parseInt($(this).val()) || 1;
+                        if(num < 1) num = 1;
+                        var total = pricePerPerson * num;
+                        $('#totalPrice').text(total.toLocaleString() + ' VNĐ');
+                    });
+                });
+                `
+            }} />
         </section>
     );
 }
