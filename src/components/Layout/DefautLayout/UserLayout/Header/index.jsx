@@ -25,7 +25,7 @@ function Header() {
         if (stored) {
           tours = JSON.parse(stored);
         }
-      } catch {}
+      } catch { }
       setUserTours(Array.isArray(tours) ? tours : []);
     } else {
       setUserName('');
@@ -75,7 +75,7 @@ function Header() {
             fontFamily: "'Montserrat', 'Segoe UI', Arial, sans-serif",
           }}
         >
-          Wide Quest
+          Wild Quest
         </Link>
         {/* Toggle button for mobile */}
         <button
@@ -132,7 +132,7 @@ function Header() {
                   <User size={20} className="me-2" />
                   <span>{userName}</span>
                 </button>
-                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" style={{minWidth: 260}}>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown" style={{ minWidth: 260 }}>
                   <li>
                     <Link className="dropdown-item" to="/profile">
                       <User size={16} className="me-2" />
@@ -141,7 +141,7 @@ function Header() {
                   </li>
                   <li>
                     <Link className="dropdown-item" to="/bookedtours">
-                      <span className="fw-bold text-secondary" style={{fontSize: 15}}>Tour đã đặt</span>
+                      <span className="fw-bold text-secondary" style={{ fontSize: 15 }}>Tour đã đặt</span>
                     </Link>
                   </li>
                   <li><hr className="dropdown-divider" /></li>
@@ -149,7 +149,7 @@ function Header() {
                     <button
                       className="dropdown-item text-danger"
                       onClick={handleLogout}
-                      style={{fontWeight: 600}}
+                      style={{ fontWeight: 600 }}
                     >
                       Đăng xuất
                     </button>

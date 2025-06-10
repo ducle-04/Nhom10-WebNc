@@ -150,9 +150,9 @@ function Home() {
 
             </div>
             <div className="col-md-6 about-content" >
-              <h2 className="section-title">Về Wide Quest</h2>
+              <h2 className="section-title">Về Wild Quest</h2>
               <p className="section-text">
-                Wide Quest là nền tảng du lịch dành cho những người yêu thích khám phá, trải nghiệm và phiêu lưu.
+                Wild Quest là nền tảng du lịch dành cho những người yêu thích khám phá, trải nghiệm và phiêu lưu.
                 Chúng tôi mang đến các tour độc đáo, điểm đến hấp dẫn và dịch vụ tận tâm để mỗi chuyến đi của bạn trở nên đáng nhớ.
               </p>
               <Link to="/about" className="btn-custom">Tìm hiểu thêm</Link>
@@ -167,7 +167,7 @@ function Home() {
               <h2 className="section-title">Lý do nên chọn chúng tôi</h2>
               <p className="section-text">
                 Với đội ngũ chuyên nghiệp, lịch trình linh hoạt và những hành trình được thiết kế đặc biệt cho từng cá nhân,
-                Wide Quest là người bạn đồng hành lý tưởng trong mọi chuyến đi của bạn. Chúng tôi cam kết mang lại trải nghiệm
+                Wild Quest là người bạn đồng hành lý tưởng trong mọi chuyến đi của bạn. Chúng tôi cam kết mang lại trải nghiệm
                 an toàn, thú vị và đáng nhớ.
               </p>
             </div>

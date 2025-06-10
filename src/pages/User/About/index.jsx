@@ -36,7 +36,7 @@ function About() {
       <section className="about-header animate-on-scroll">
         <div className="container">
           <div className="header-content">
-            <h1 className="page-title">Về Wide Quest</h1>
+            <h1 className="page-title">Về Wild Quest</h1>
             <p className="header-subtitle">Khám phá hành trình của chúng tôi trong việc tạo ra những chuyến đi đầy cảm hứng</p>
           </div>
         </div>
@@ -50,7 +50,7 @@ function About() {
                 <div className="col-md-6">
                   <h2 className="section-title">Sứ mệnh</h2>
                   <p className="section-text">
-                    Wide Quest tự hào là người bạn đồng hành đáng tin cậy trên mỗi hành trình khám phá thế giới. Chúng tôi cam kết mang đến những trải nghiệm du lịch khác biệt — không chỉ an toàn, tiện nghi mà còn đong đầy cảm xúc và ý nghĩa. Mỗi chuyến đi là cơ hội để du khách mở rộng tầm nhìn, hòa mình vào thiên nhiên hoang sơ và văn hóa bản địa.
+                    Wild Quest tự hào là người bạn đồng hành đáng tin cậy trên mỗi hành trình khám phá thế giới. Chúng tôi cam kết mang đến những trải nghiệm du lịch khác biệt — không chỉ an toàn, tiện nghi mà còn đong đầy cảm xúc và ý nghĩa. Mỗi chuyến đi là cơ hội để du khách mở rộng tầm nhìn, hòa mình vào thiên nhiên hoang sơ và văn hóa bản địa.
                   </p>
                 </div>
                 <div className="col-md-6">
@@ -58,7 +58,7 @@ function About() {
                     src="/images/about/mission.jpg"
                     alt="Sứ mệnh Wide Quest"
                     className="img-fluid rounded shadow-sm"
-                    style={{ height: '300px', objectFit: 'cover' }}
+                    style={{ height: '400px', objectFit: 'cover' }}
                   />
                 </div>
               </div>
@@ -71,7 +71,7 @@ function About() {
                 <div className="col-md-6 order-md-2">
                   <h2 className="section-title">Đội ngũ</h2>
                   <p className="section-text">
-                    Đội ngũ Wide Quest am hiểu sâu sắc từng điểm đến, mang đến trải nghiệm cá nhân hóa và đáng nhớ. Chúng tôi luôn lắng nghe, tư vấn và thiết kế hành trình phù hợp, từ phiêu lưu mạo hiểm đến thư giãn nhẹ nhàng, đảm bảo sự an tâm và hài lòng cho mọi du khách.
+                    Đội ngũ Wild Quest am hiểu sâu sắc từng điểm đến, mang đến trải nghiệm cá nhân hóa và đáng nhớ. Chúng tôi luôn lắng nghe, tư vấn và thiết kế hành trình phù hợp, từ phiêu lưu mạo hiểm đến thư giãn nhẹ nhàng, đảm bảo sự an tâm và hài lòng cho mọi du khách.
                   </p>
                 </div>
                 <div className="col-md-6 order-md-1">
@@ -92,7 +92,7 @@ function About() {
                 <div className="col-md-6">
                   <h2 className="section-title">Lịch sử thành lập</h2>
                   <p className="section-text">
-                    Thành lập năm 2015, Wide Quest khởi nguồn từ đam mê tạo nên những chuyến đi ý nghĩa. Qua 10 năm, chúng tôi đã phục vụ hàng ngàn du khách, mở rộng mạng lưới đối tác và nâng cấp dịch vụ với công nghệ hiện đại. Sự tin tưởng của khách hàng là động lực để chúng tôi vươn xa.
+                    Thành lập năm 2015, Wild Quest khởi nguồn từ đam mê tạo nên những chuyến đi ý nghĩa. Qua 10 năm, chúng tôi đã phục vụ hàng ngàn du khách, mở rộng mạng lưới đối tác và nâng cấp dịch vụ với công nghệ hiện đại. Sự tin tưởng của khách hàng là động lực để chúng tôi vươn xa.
                   </p>
                 </div>
                 <div className="col-md-6">

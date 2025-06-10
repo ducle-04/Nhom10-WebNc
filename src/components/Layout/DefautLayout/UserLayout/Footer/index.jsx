@@ -64,9 +64,9 @@ function Footer() {
         <div className="row gy-4 mb-4">
           {/* Logo & Contact Info */}
           <div className="col-lg-4 col-md-6 footer-animate-item">
-            
-              <span className="footer-brand-text">Wide Quest</span>
-        
+
+            <span className="footer-brand-text">Wild Quest</span>
+
             <p className="footer-slogan mt-2">Khám phá thế giới cùng chúng tôi</p>
             <div className="footer-contact mt-3">
               <div className="d-flex align-items-center mb-2">
@@ -114,11 +114,11 @@ function Footer() {
             <div className="footer-newsletter mb-3">
               <p className="mb-2">Đăng ký nhận thông tin mới nhất</p>
               <div className="input-group">
-                <input 
-                  type="email" 
-                  className="form-control" 
-                  placeholder="Email của bạn" 
-                  aria-label="Email subscription" 
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Email của bạn"
+                  aria-label="Email subscription"
                 />
                 <button className="btn btn-primary" type="button">
                   {/* Thay icon Font Awesome bằng emoji nếu FA vẫn không hiện */}
@@ -151,7 +151,7 @@ function Footer() {
 
         <div className="footer-bottom row align-items-center footer-animate-item">
           <div className="col-md-6 text-center text-md-start">
-            <p className="mb-0">© {new Date().getFullYear()} Wide Quest. All rights reserved.</p>
+            <p className="mb-0">© {new Date().getFullYear()} Wild Quest. All rights reserved.</p>
           </div>
           <div className="col-md-6 text-center text-md-end mt-3 mt-md-0">
             <Link to="/privacy" className="footer-bottom-link">Chính sách bảo mật</Link>
